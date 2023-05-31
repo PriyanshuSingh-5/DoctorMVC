@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using CommonLayer.Models;
+using DoctorListMVCApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -51,9 +52,24 @@ namespace DoctorListMVCApp.Controllers
             if (ModelState.IsValid)
             {
                 userBusiness.RegisterCustomer(register);
-                return RedirectToAction("Index", "Home");
+                Notification notification = new Notification
+                {
+                    Message = "You are registered successfully, you will receive confirmation mail to login.",
+                    Type = "success"
+                };
+                TempData["Notification"] = notification;
+                
             }
             return View(register);
         }
     }
 }
+//if (recordCreated)
+//{
+//    Notification notification = new Notification
+//    {
+//        Message = "Record created successfully.",
+//        Type = "success"
+//    };
+
+//    TempData["Notification"] = notification;
