@@ -1,0 +1,79 @@
+﻿@model CommonLayer.Models.UserModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+@*<h1>Register</h1>*@
+
+@*<h4>UserModel</h4>
+<hr />*@
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Register">
+            <div class="Title">
+                <h4>Get Started</h4>
+                <h6>Already have an account? <a href="@Url.Action("Login", "User")">SignIn</a></h6>
+
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+            <label asp-for="UserID" class="control-label"></label>
+            <input asp-for="UserID" class="form-control" />
+            <span asp-validation-for="UserID" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                @*<label asp-for="FullName" class="control-label"></label>*@
+                <input asp-for="FullName" class="form-control" placeholder="FullName" style="border-radius: 20px;"/>
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="EmailID" class="control-label"></label>*@
+                <input asp-for="EmailID" class="form-control" placeholder="EmailID" style="border-radius: 20px;"/>
+                <span asp-validation-for="EmailID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Password" class="control-label"></label>*@
+                <input asp-for="Password" class="form-control" placeholder="Password" style="border-radius: 20px;"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="ContactNo" class="control-label"></label>*@
+                <input asp-for="ContactNo" class="form-control" placeholder="ContactNo" style="border-radius: 20px;"/>
+                <span asp-validation-for="ContactNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="RoleID" class="control-label"></label>*@
+                <input asp-for="RoleID" class="form-control" placeholder="RoleID" style="border-radius: 20px;" />
+              
+                <span asp-validation-for="RoleID" class="text-danger"></span>
+            </div>
+            @*<div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="IsAccepted" /> @Html.DisplayNameFor(model => model.IsAccepted)
+            </label>
+        </div>*@
+            @*<div class="form-group">
+            <label asp-for="CreatedAt" class="control-label"></label>
+            <input asp-for="CreatedAt" class="form-control" />
+            <span asp-validation-for="CreatedAt" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedAt" class="control-label"></label>
+            <input asp-for="UpdatedAt" class="form-control" />
+            <span asp-validation-for="UpdatedAt" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary" style="width: 315px; border-radius: 20px;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

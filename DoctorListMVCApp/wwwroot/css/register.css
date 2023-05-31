@@ -1,0 +1,11 @@
+﻿.row {
+    display: flex;
+    justify-content: start;
+    margin-top: 80px;
+    padding: 35px;
+}
+
+.Title {
+    display: flex;
+    flex-direction: column;
+}

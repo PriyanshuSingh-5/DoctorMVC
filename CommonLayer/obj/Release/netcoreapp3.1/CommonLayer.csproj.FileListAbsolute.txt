@@ -1,0 +1,10 @@
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\bin\Release\netcoreapp3.1\CommonLayer.deps.json
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\bin\Release\netcoreapp3.1\CommonLayer.dll
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\bin\Release\netcoreapp3.1\CommonLayer.pdb
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.AssemblyInfo.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.dll
+C:\Users\Admin\source\repos\DoctorListMVCApp\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.pdb

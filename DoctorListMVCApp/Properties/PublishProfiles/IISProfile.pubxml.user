@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <History>True|2023-05-24T07:45:17.4744243Z;True|2023-05-23T18:08:18.8569188+05:30;True|2023-05-23T17:39:54.0127676+05:30;True|2023-05-23T17:33:33.0293721+05:30;False|2023-05-23T17:31:59.6882653+05:30;True|2023-05-23T12:33:30.7641376+05:30;True|2023-05-22T18:20:53.5060055+05:30;True|2023-05-22T17:35:42.0354602+05:30;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DBConnection">
+      <Value>Data Source=LAPTOP-QJSM3AFE\SQLEXPRESS%3bInitial Catalog=DoctorListMVCDB%3bIntegrated Security=True%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

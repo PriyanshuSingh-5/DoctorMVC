@@ -1,0 +1,15 @@
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\bin\Release\netcoreapp3.1\BusinessLayer.deps.json
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\bin\Release\netcoreapp3.1\BusinessLayer.dll
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\bin\Release\netcoreapp3.1\BusinessLayer.pdb
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\bin\Release\netcoreapp3.1\CommonLayer.dll
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\bin\Release\netcoreapp3.1\RepositoryLayer.dll
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\bin\Release\netcoreapp3.1\RepositoryLayer.pdb
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\bin\Release\netcoreapp3.1\CommonLayer.pdb
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\obj\Release\netcoreapp3.1\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\obj\Release\netcoreapp3.1\BusinessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\obj\Release\netcoreapp3.1\BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\obj\Release\netcoreapp3.1\BusinessLayer.AssemblyInfo.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\obj\Release\netcoreapp3.1\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\obj\Release\netcoreapp3.1\BusinessLayer.csproj.CopyComplete
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\obj\Release\netcoreapp3.1\BusinessLayer.dll
+C:\Users\Admin\source\repos\DoctorListMVCApp\BusinessLayer\obj\Release\netcoreapp3.1\BusinessLayer.pdb

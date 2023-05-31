@@ -1,0 +1,74 @@
+﻿.Container1 {
+    display:flex;
+    align-items: center;
+    justify-content:start;
+   /* position:relative;
+   left: 380px;*/
+   //background-color:aliceblue;
+    margin-top: 80px;
+    padding: 35px;
+    //border: 1px solid grey;
+    border-radius: 20px;
+    width: 500px;
+    height: 500px;
+   // box-shadow: 5px 5px 5px 5px #E5E4E2;
+    //border: 3px solid red;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.Title {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    //margin-top: 80px;
+    // padding: 35px;
+}
+.Container2 {
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    width: 20vw;
+    height: 20vw;
+    position: relative;
+    left: 7px;
+    //border: 3px solid red;
+    margin-top: 20px;
+}
+/*.button {*/
+    /*display: flex;
+    justify-content: center;
+    align-content: stretch;*/
+    /*height: 38px;*/ /* Adjust the height as needed */
+    /*line-height: 38px;*/ /* Ensure the button text aligns vertically with the input field */
+    /*padding: 0 10px;*/ /* Adjust the padding to match the input field */
+    /*box-sizing: border-box;*/
+    /*width:100px;*/
+/*}*/
+
+.btn btn-primary{
+    width: 200px;
+}
+
+.form-control {
+    display: flex;
+}
+
+.imgDiv{
+    display:flex;
+    justify-content:flex-start;
+}
+
+
+/*body {*/
+    /*background-image: url('../assets/BackgroundDoc.jpg');*/
+    /*background-repeat: no-repeat;
+    background-size: cover;*/
+    /* Additional CSS properties for positioning, scaling, etc. */
+/*}*/
+
+/*Register CSS*/

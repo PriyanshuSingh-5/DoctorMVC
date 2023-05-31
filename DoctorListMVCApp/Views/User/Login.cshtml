@@ -1,0 +1,57 @@
+﻿@model CommonLayer.Models.UserLogin
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<link rel="stylesheet" href="~/css/Login.css" />
+
+@*<hr />*@
+<div class="Container1">
+    
+    <div class="Container2">
+        <form asp-action="Login">
+            <div class="Title">
+                <h4>Welcome back !</h4>
+                <h6>Sign in by entering information below</h6>
+
+            </div>
+            <div class="imgDiv">
+                @*<img src="~/assets/Dontmakemethink.jpg"/>*@
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="EmailID" class="control-label"></label>
+            <i class="fas fa-envelope"></i>*@
+
+                <input asp-for="EmailID" class="form-control" placeholder="EmailId" style="border-radius: 20px;" />
+                <span asp-validation-for="EmailID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Password" class="control-label"></label>*@
+                <input asp-for="Password" class="form-control" type="password" placeholder="Password" style="border-radius: 20px;" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            @Html.CheckBoxFor(m => m.Password)
+        </div>*@
+            <div class="button">
+                <input type="submit" value="Login" class="btn btn-primary" style="width: 300px; border-radius: 20px;" />
+            </div>
+            <div class="Title">
+                <h6>Don't have an account? <a href="@Url.Action("Register", "User")">Create one here</a></h6>
+                
+
+            </div>
+        </form>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+@*<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
