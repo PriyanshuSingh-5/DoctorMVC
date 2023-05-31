@@ -9,5 +9,7 @@ namespace RepositoryLayer.Interfaces
     {
         public bool LoginAdmin(UserLogin loginAccount);
         public UserModel RegisterCustomer(UserModel registerAccount);
+
+        public List<UserModel> GetAllBook();
     }
 }

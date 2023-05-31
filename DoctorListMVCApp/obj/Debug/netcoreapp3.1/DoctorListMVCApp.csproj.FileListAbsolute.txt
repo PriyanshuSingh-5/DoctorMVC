@@ -127,3 +127,4 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Login.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Register.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\GetAllDoc.cshtml.g.cs

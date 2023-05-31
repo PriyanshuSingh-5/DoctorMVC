@@ -62,6 +62,14 @@ namespace DoctorListMVCApp.Controllers
             }
             return View(register);
         }
+        [HttpGet]
+        public IActionResult GetAllDoc()
+        {
+            List<UserModel> lstEmployee = new List<UserModel>();
+            lstEmployee = userBusiness.GetAllBook().ToList();
+
+            return View(lstEmployee);
+        }
     }
 }
 //if (recordCreated)

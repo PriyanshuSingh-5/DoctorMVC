@@ -24,5 +24,9 @@ namespace BusinessLayer.Services
         {
             return repo.RegisterCustomer(registerAccount);
         }
+        public List<UserModel> GetAllBook()
+        {
+            return repo.GetAllBook();
+        }
     }
 }
