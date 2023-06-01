@@ -9,6 +9,7 @@ namespace BusinessLayer.Interfaces
     {
         public bool LoginAdmin(UserLogin loginAccount);
         public UserModel RegisterCustomer(UserModel registerAccount);
-        public List<UserModel> GetAllBook();
+        public List<UserModel> GetAllDocs();
+        public UserModel GetDocDetail(string EmailID);
     }
 }

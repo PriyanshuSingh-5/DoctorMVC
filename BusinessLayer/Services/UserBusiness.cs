@@ -24,9 +24,14 @@ namespace BusinessLayer.Services
         {
             return repo.RegisterCustomer(registerAccount);
         }
-        public List<UserModel> GetAllBook()
+        public List<UserModel> GetAllDocs()
         {
-            return repo.GetAllBook();
+            return repo.GetAllDocs();
+        }
+
+        public UserModel GetDocDetail(string EmailID)
+        {
+            return repo.GetDocDetail(EmailID);
         }
     }
 }

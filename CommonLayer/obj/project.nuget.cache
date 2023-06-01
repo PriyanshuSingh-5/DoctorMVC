@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "VZBFtRTKh0QrFOSQC+pBHK7hZdbf8y8aFXd81Vg5cEGHoLsbBFvSuhxeIYLcTm7OFo4aVRzBnnysHyyugdVD/A==",
+  "dgSpecHash": "jfZdnlwHkOfnJ1nJO0iufBl2pMH2IeJzAHfUF5UDrk2EiulxQ0w/0EXbOmmEqXgZS1zOOAsExmi/i4YAQmmnaA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\source\\repos\\DoctorListMVCApp\\CommonLayer\\CommonLayer.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\experimental.system.messaging\\1.1.0\\experimental.system.messaging.1.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

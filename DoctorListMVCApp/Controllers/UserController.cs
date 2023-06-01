@@ -34,7 +34,7 @@ namespace DoctorListMVCApp.Controllers
             if (ModelState.IsValid)
             {
                 userBusiness.LoginAdmin(login);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetAllDoc");
             }
             return View(login);
         }
@@ -66,9 +66,36 @@ namespace DoctorListMVCApp.Controllers
         public IActionResult GetAllDoc()
         {
             List<UserModel> lstEmployee = new List<UserModel>();
-            lstEmployee = userBusiness.GetAllBook().ToList();
+            lstEmployee = userBusiness.GetAllDocs().ToList();
 
             return View(lstEmployee);
+        }
+
+        [HttpGet]
+        public IActionResult Accept(string EmailID)
+        {
+            if (EmailID == null)
+            {
+                return NotFound();
+            }
+            UserModel user = userBusiness.GetDocDetail(EmailID);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Accept")]
+        [ValidateAntiForgeryToken]
+        public IActionResult AcceptConfirmed(string EmailID)
+        {
+            var user = userBusiness.GetAllDocs();
+            var result = user.Find(a => a.EmailID == EmailID);
+            MSMQ mSMQModel = new MSMQ();
+            mSMQModel.SendMessage(EmailID,result.FullName);
+            return RedirectToAction("GetAllDoc");
         }
     }
 }

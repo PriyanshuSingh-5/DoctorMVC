@@ -1,11 +1,3 @@
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.csproj.AssemblyReference.cache
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.AssemblyInfoInputs.cache
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.AssemblyInfo.cs
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.csproj.CoreCompileInputs.cache
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.RazorAssemblyInfo.cache
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.RazorAssemblyInfo.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\DoctorListMVCApp.exe
@@ -16,6 +8,7 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\DoctorListMVCApp.pdb
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\DoctorListMVCApp.Views.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\DoctorListMVCApp.Views.pdb
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\Experimental.System.Messaging.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
@@ -40,6 +33,7 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\System.Composition.Runtime.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\System.Reactive.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
@@ -104,6 +98,14 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\BusinessLayer.pdb
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\CommonLayer.pdb
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\RepositoryLayer.pdb
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.AssemblyInfo.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.RazorAssemblyInfo.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.RazorAssemblyInfo.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\staticwebassets\DoctorListMVCApp.StaticWebAssets.Manifest.cache
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\staticwebassets\DoctorListMVCApp.StaticWebAssets.xml
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\scopedcss\bundle\DoctorListMVCApp.styles.css
@@ -115,6 +117,10 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Accept.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\GetAllDoc.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Login.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Register.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.RazorTargetAssemblyInfo.cache
@@ -124,7 +130,3 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.pdb
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.genruntimeconfig.cache
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Login.cshtml.g.cs
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Register.cshtml.g.cs
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\bin\Debug\netcoreapp3.1\System.Reactive.dll
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\GetAllDoc.cshtml.g.cs
