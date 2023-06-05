@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Interfaces;
 using CommonLayer.Models;
 using DoctorListMVCApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -33,8 +34,26 @@ namespace DoctorListMVCApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                userBusiness.LoginAdmin(login);
-                return RedirectToAction("GetAllDoc");
+                var data = userBusiness.GetAllDocs();
+               
+                var acceptedUser = data.FirstOrDefault(u=>u.EmailID==login.EmailID && u.Password==login.Password && u.IsAccepted);
+                if (acceptedUser!=null)
+                {
+                    if (acceptedUser.IsAccepted.Equals(true))
+                    {
+                        userBusiness.LoginAdmin(login);
+                        return RedirectToAction("GetAllDoc");
+                    }
+                    else
+                    {
+                        ViewBag.msg = "you are not authorized to login yet.";
+                    }
+                }
+                else
+                    {
+                    ViewBag.msg = "you are not authorized to login yet.";
+            }
+            
             }
             return View(login);
         }
@@ -51,7 +70,9 @@ namespace DoctorListMVCApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                userBusiness.RegisterCustomer(register);
+                var result=userBusiness.RegisterCustomer(register);
+                //HttpContext.Session.SetInt32("RoleID", result.RoleID);
+                
                 Notification notification = new Notification
                 {
                     Message = "You are registered successfully, you will receive confirmation mail to login.",

@@ -11,6 +11,7 @@
     
     <div class="Container2">
         <form asp-action="Login">
+             @ViewBag.msg
             <div class="Title">
                 <h4>Welcome back !</h4>
                 <h6>Sign in by entering information below</h6>
@@ -40,7 +41,7 @@
             </div>
             <div class="Title">
                 <h6>Don't have an account? <a href="@Url.Action("Register", "User")">Create one here</a></h6>
-                
+
 
             </div>
         </form>

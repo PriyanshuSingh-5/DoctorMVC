@@ -136,7 +136,7 @@ namespace RepositoryLayer.Services
                                 Password = Reader.IsDBNull("Password") ? string.Empty : Reader.GetString("Password"),
                                 ContactNo = Reader.IsDBNull("ContactNo") ? 0 : Reader.GetInt64("ContactNo"),
                                 RoleID = Reader.IsDBNull("RoleID") ? 0 : Reader.GetInt32("RoleID"),
-                                IsAccepted = (Reader.IsDBNull("IsAccepted") ? false :Reader.GetBoolean("IsAccepted")),
+                                IsAccepted = Reader.IsDBNull("IsAccepted") ? false :Reader.GetBoolean("IsAccepted"),
                             };
                             books.Add(docs);
                         }
