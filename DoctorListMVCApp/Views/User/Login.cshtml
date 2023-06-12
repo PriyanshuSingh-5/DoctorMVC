@@ -11,7 +11,17 @@
     
     <div class="Container2">
         <form asp-action="Login">
-             @ViewBag.msg
+            @*@ViewBag.msg*@
+            @if (TempData["Notification"] != null)
+            {
+                var notification = (Notification)TempData["Notification"];
+                if (notification.Type == "success")
+                {
+                    <div class="notification success">
+                        @notification.Message
+                    </div>
+                }
+            }
             <div class="Title">
                 <h4>Welcome back !</h4>
                 <h6>Sign in by entering information below</h6>

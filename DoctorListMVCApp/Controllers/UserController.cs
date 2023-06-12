@@ -36,7 +36,7 @@ namespace DoctorListMVCApp.Controllers
             {
                 var data = userBusiness.GetAllDocs();
                
-                var acceptedUser = data.FirstOrDefault(u=>u.EmailID==login.EmailID && u.Password==login.Password && u.IsAccepted);
+                var acceptedUser = data.FirstOrDefault(u=>u.EmailID==login.EmailID && u.Password==login.Password );
                 if (acceptedUser!=null)
                 {
                     if (acceptedUser.IsAccepted.Equals(true))
@@ -46,13 +46,16 @@ namespace DoctorListMVCApp.Controllers
                     }
                     else
                     {
-                        ViewBag.msg = "you are not authorized to login yet.";
+                        // ViewBag.msg = "you are not authorized to login yet.";
+                        Notification notification = new Notification
+                        {
+                            Message = "you are not authorized to login yet.",
+                            Type = "success"
+                        };
+                        TempData["Notification"] = notification;
                     }
                 }
-                else
-                    {
-                    ViewBag.msg = "you are not authorized to login yet.";
-            }
+                
             
             }
             return View(login);

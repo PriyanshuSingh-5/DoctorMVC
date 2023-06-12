@@ -72,3 +72,29 @@
 /*}*/
 
 /*Register CSS*/
+
+.notification {
+    padding: 10px;
+    border-radius: 4px;
+    animation: fadeOut 5s linear forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.success {
+    background-color: #E3242B;
+    color: #fff;
+}
+
