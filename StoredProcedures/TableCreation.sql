@@ -24,3 +24,71 @@ insert into Users(Fullname,EmailID,Password,ContactNo,RoleID)Values('Administrat
 select * from Users
 select * from Roles
 insert into Roles(Role)values('Doctor')
+
+create table PatientProfile(
+PatientID int Primary key identity(1,1),
+DOB date,
+Gender varchar(25),
+BloodGroup char(3),
+PatientImage varchar(255),
+HealthConcern varchar(50),
+MedicalHistory varchar(255),
+InsuranceProvider varchar(50),
+UserID int FOREIGN KEY REFERENCES Users(UserID),
+Istrash bit,
+CreatedAt datetime,
+UpdatedAt datetime
+)
+
+Alter table PatientProfile
+ADD CONSTRAINT trash
+DEFAULT '0' FOR Istrash
+
+
+Create table Category(
+CategoryID int Primary key Identity(1,1),
+Specialization varchar(50)
+)
+insert into Category(Specialization) Values('Surgeon')
+select * from Category
+create table Services(
+ServiceId int Primary key Identity(1,1),
+Service varchar(250),
+ServiceFee float
+)
+
+insert into Services(Service,ServiceFee)values('Consultation',750)
+insert into Services(Service,ServiceFee)values('RoutineCheckup',1500)
+insert into Services(Service,ServiceFee)values('Prescription',550)
+insert into Services(Service,ServiceFee)values('PathologyTest',250)
+insert into Services(Service,ServiceFee)values('Surgery',37750)
+insert into Services(Service,ServiceFee)values('Physical examination',750)
+
+
+Create table ScheduleLocation(
+ScheduleId int primary key Identity(1,1),
+ScheduleTime time,
+Location varchar(250),
+UserID int FOREIGN KEY REFERENCES Users(UserID),
+RoleID int FOREIGN KEY REFERENCES Roles(RoleID)
+)
+drop table ScheduleLocation
+
+insert into ScheduleLocation(ScheduleTime,Location,UserID,RoleID) values('12:45:30','Bangalore,HSR', 2,3)
+insert into ScheduleLocation(ScheduleTime,Location,UserID,RoleID) values('17:45:30','Electroniccity,BLR', 2,3)
+
+
+
+Create table DoctorProfile(
+DoctorID int Primary key Identity(1,1),
+DoctorImage varchar(255),
+Age int,
+Gender varchar(25),
+Qualification varchar(150),
+Experience float,
+UserID int FOREIGN KEY REFERENCES Users(UserID),
+RoleID int FOREIGN KEY REFERENCES Roles(RoleID),
+IsTrash bit,
+CreatedAt datetime,
+UpdatedAt datetime
+)

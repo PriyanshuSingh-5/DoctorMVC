@@ -44,6 +44,9 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    var RoleId = item.RoleID;
+    if (RoleId != 1 && RoleId!= 2)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserID)
@@ -73,11 +76,12 @@
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>
             <td>
-                @Html.ActionLink("Accept", "Accept", new { EmailID=item.EmailID  }) |
+                @Html.ActionLink("Accept", "Accept", new { EmailID = item.EmailID }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
+    }
 }
     </tbody>
 </table>
