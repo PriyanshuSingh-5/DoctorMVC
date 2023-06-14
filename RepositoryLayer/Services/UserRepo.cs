@@ -24,40 +24,147 @@ namespace RepositoryLayer.Services
 
         }
 
-
-        public bool LoginAdmin(UserLogin loginAccount)
+        public UserModel LoginAdmin(UserLogin loginCustomerAccount)
         {
             try
             {
                 connection.Open();
-                SqlCommand cmd = new SqlCommand("uspUserLogin ", connection)
+                SqlCommand cmd = new SqlCommand("uspUserLogin", connection)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("AdminID", loginAccount.EmailID);
-                cmd.Parameters.AddWithValue("Password", loginAccount.Password);
+                cmd.Parameters.AddWithValue("EmailID", loginCustomerAccount.EmailID);
+                cmd.Parameters.AddWithValue("Password", loginCustomerAccount.Password);
                 var returnParameter = cmd.Parameters.Add("@Result", SqlDbType.Int);
                 returnParameter.Direction = ParameterDirection.ReturnValue;
 
-
+               UserModel user = new UserModel();
+                SqlDataReader rd = cmd.ExecuteReader();
                 var result = returnParameter.Value;
+
                 if (result != null && result.Equals(2))
                 {
-                    throw new Exception("AdminID is invalid");
+                    throw new Exception("Email not registered");
                 }
-
-                return true;
+               
+                if (rd.Read())
+                {
+                    user.UserID = rd["UserID"] == DBNull.Value ? default : rd.GetInt32("UserID");
+                    user.FullName = rd["FullName"] == DBNull.Value ? default : rd.GetString("FullName");
+                    user.EmailID = rd["EmailID"] == DBNull.Value ? default : rd.GetString("EmailID");
+                    user.Password = rd["Password"] == DBNull.Value ? default : rd.GetString("Password");
+                    user.RoleID = rd["RoleID"] == DBNull.Value ? default : rd.GetInt32("RoleID");
+                    user.IsAccepted= (rd.IsDBNull("IsAccepted") ? false : rd.GetBoolean("IsAccepted"));
+                }
+                return user;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
             finally
             {
                 connection.Close();
             }
         }
+
+        //public UserModel LoginAdmin(UserLogin loginModel)
+        //{
+        //    try
+        //    {
+        //        //using (SqlConnection con = new SqlConnection(this.iconfiguration.GetConnectionString("Hospital")))
+        //        //{
+        //            SqlCommand cmd = new SqlCommand("uspUserLogin", connection);
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            connection.Open();
+        //            cmd.Parameters.AddWithValue("EmailID", loginModel.EmailID);
+        //            cmd.Parameters.AddWithValue("Password", loginModel.Password);
+
+
+        //            var result = cmd.ExecuteScalar();
+
+        //            if (result != null)
+        //            {
+
+        //                SqlDataReader reader = cmd.ExecuteReader();
+        //                UserModel regiModel = new UserModel();
+
+
+        //                while (reader.Read())
+        //                {
+        //                    regiModel.UserID = Convert.ToInt32(reader["UserID"]);
+        //                    regiModel.FullName = reader["FullName"].ToString();
+        //                    regiModel.EmailID = reader["EmailID"].ToString();
+        //                    regiModel.Password = reader["Password"].ToString();
+        //                    regiModel.RoleID = Convert.ToInt32(reader["RoleID"]);
+        //            }
+        //                //con.Close();
+        //                return regiModel;
+        //            }
+        //            else
+        //            {
+        //                return null;
+        //            }
+        //       // }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        //public bool LoginAdmin(UserLogin loginAccount)
+        //{
+        //    try
+        //    {
+        //            SqlCommand cmd = new SqlCommand("uspUserLogin ", connection)
+        //            {
+        //                CommandType = CommandType.StoredProcedure
+        //            };
+        //            connection.Open();
+        //            cmd.Parameters.AddWithValue("EmailID", loginAccount.EmailID);
+        //            cmd.Parameters.AddWithValue("Password", loginAccount.Password);
+
+        //            var result = cmd.ExecuteScalar();
+        //        return true;
+
+
+        //            //if (result != null)
+        //            //{
+
+        //            //    SqlDataReader reader = cmd.ExecuteReader();
+        //            //    UserModel regiModel = new UserModel();
+
+
+        //            //    while (reader.Read())
+        //            //    {
+        //            //        regiModel.UserID = Convert.ToInt32(reader["UserID"]);
+        //            //        regiModel.FullName = reader["FullName"].ToString();
+        //            //        regiModel.EmailID = reader["EmailID"].ToString();
+        //            //        regiModel.Password = reader["Password"].ToString();
+        //            //        regiModel.RoleID = Convert.ToInt32(reader["RoleID"]);
+        //            //    }
+        //            //    //con.Close();
+        //            //    return regiModel;
+        //            //}
+        //            //else
+        //            //{
+        //            //    return null;
+        //            //}
+
+        //    }
+
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+        //}
 
 
         public UserModel RegisterCustomer(UserModel registerAccount)
@@ -88,7 +195,7 @@ namespace RepositoryLayer.Services
                 }
                 if (rd.Read())
                 {
-                    customer.UserID = rd["UserID"] == DBNull.Value ? default : rd.GetInt64("UserID");
+                    customer.UserID = rd["UserID"] == DBNull.Value ? default : rd.GetInt32("UserID");
                     customer.FullName = rd["FullName"] == DBNull.Value ? default : rd.GetString("FullName");
                     customer.EmailID = rd["EmailID"] == DBNull.Value ? default : rd.GetString("EmailID");
                     //customer.Password = rd["Password"] == DBNull.Value ? default : rd.GetString("Password");
@@ -109,101 +216,10 @@ namespace RepositoryLayer.Services
         }
 
 
-        public List<UserModel> GetAllDocs()
-        {
-            //SqlConnection connection = new SqlConnection(connectionString);
-            try
-            {
-                List<UserModel> books = new List<UserModel>();
-                using (connection)
-                {
-                    SqlCommand command = new SqlCommand("uspGetAllDoctors", connection);
-
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    connection.Open();
-                    SqlDataReader Reader = command.ExecuteReader();
-
-                    if (Reader.HasRows)
-                    {
-                        while (Reader.Read())
-                        {
-                            UserModel docs = new UserModel()
-                            {
-                                UserID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt64("UserID"),
-                                FullName = Reader.IsDBNull("FullName") ? string.Empty : Reader.GetString("FullName"),
-                                EmailID = Reader.IsDBNull("EmailID") ? string.Empty : Reader.GetString("EmailID"),
-                                Password = Reader.IsDBNull("Password") ? string.Empty : Reader.GetString("Password"),
-                                ContactNo = Reader.IsDBNull("ContactNo") ? 0 : Reader.GetInt64("ContactNo"),
-                                RoleID = Reader.IsDBNull("RoleID") ? 0 : Reader.GetInt32("RoleID"),
-                                IsAccepted = Reader.IsDBNull("IsAccepted") ? false :Reader.GetBoolean("IsAccepted"),
-                            };
-                            books.Add(docs);
-                        }
-                        return books;
-                    }
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                if (connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
-        }
+       
 
 
-        public UserModel GetDocDetail(string EmailID)
-        {
-            try
-            {
-                //UserModel books = new UserModel();
-                UserModel docs = new UserModel();
-                using (connection)
-                {
-                    SqlCommand command = new SqlCommand("uspGetAllDocById", connection);
-
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("EmailID", EmailID);
-
-                    connection.Open();
-                    SqlDataReader Reader = command.ExecuteReader();
-
-                    
-                        while (Reader.Read())
-                        {
-
-
-                        docs.UserID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt64("UserID");
-                        docs.FullName = Reader.IsDBNull("FullName") ? string.Empty : Reader.GetString("FullName");
-                        docs.EmailID = Reader.IsDBNull("EmailID") ? string.Empty : Reader.GetString("EmailID");
-                        docs.Password = Reader.IsDBNull("Password") ? string.Empty : Reader.GetString("Password");
-                        docs.ContactNo = Reader.IsDBNull("ContactNo") ? 0 : Reader.GetInt64("ContactNo");
-                        docs.RoleID = Reader.IsDBNull("RoleID") ? 0 : Reader.GetInt32("RoleID");
-                        docs.IsAccepted = (Reader.IsDBNull("IsAccepted") ? false : Reader.GetBoolean("IsAccepted"));
-                            
-                            //books.Add(docs);
-                        }
-                        return docs;
-                   
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
+       
     }
 
     }

@@ -30,6 +30,18 @@ namespace DoctorListMVCApp
             services.AddControllersWithViews();
             services.AddTransient<IUserBusiness, UserBusiness>();
             services.AddTransient<IUserRepo, UserRepo>();
+            services.AddTransient<IAdminBussiness, AdminBussiness>();
+            services.AddTransient<IAdminRepo, AdminRepo>();
+            services.AddTransient<IDoctorBusiness, DoctorBusiness>();
+            services.AddTransient<IDoctorRepo, DoctorRepo>();
+            services.AddTransient<IPatientRepo, PatientRepo>();
+            services.AddTransient<IPatientBusiness, PatientBusiness>();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(120);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +60,7 @@ namespace DoctorListMVCApp
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

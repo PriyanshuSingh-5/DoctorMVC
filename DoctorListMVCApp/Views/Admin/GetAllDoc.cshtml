@@ -9,8 +9,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table table-bordered">
-    <thead class="thead-dark">
+<table class="table">
+    <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.UserID)
@@ -39,7 +39,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.UpdatedAt)
             </th>
-            <th>Action</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -73,7 +73,7 @@
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>
             <td>
-                @Html.ActionLink("Accept", "Accept", new {  EmailID=item.EmailID }) |
+                @Html.ActionLink("Accept", "Accept", new { EmailID=item.EmailID  }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>

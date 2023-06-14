@@ -117,8 +117,6 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Accept.cshtml.g.cs
-C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\GetAllDoc.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Login.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\User\Register.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
@@ -130,3 +128,8 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.dll
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.pdb
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\DoctorListMVCApp.genruntimeconfig.cache
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Doctor\GetDocDetails.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Patient\AddPatientProfile.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\GetAllDoc.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Accept.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Patient\GetPatientDetails.cshtml.g.cs

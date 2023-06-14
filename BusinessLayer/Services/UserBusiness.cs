@@ -16,7 +16,7 @@ namespace BusinessLayer.Services
             this.repo = repo;
         }
 
-        public bool LoginAdmin(UserLogin loginAccount)
+        public UserModel LoginAdmin(UserLogin loginAccount)
         {
             return repo.LoginAdmin(loginAccount);
         }
@@ -24,14 +24,6 @@ namespace BusinessLayer.Services
         {
             return repo.RegisterCustomer(registerAccount);
         }
-        public List<UserModel> GetAllDocs()
-        {
-            return repo.GetAllDocs();
-        }
-
-        public UserModel GetDocDetail(string EmailID)
-        {
-            return repo.GetDocDetail(EmailID);
-        }
+        
     }
 }

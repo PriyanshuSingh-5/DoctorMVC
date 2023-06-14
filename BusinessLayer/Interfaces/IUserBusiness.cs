@@ -7,9 +7,9 @@ namespace BusinessLayer.Interfaces
 {
     public interface IUserBusiness
     {
-        public bool LoginAdmin(UserLogin loginAccount);
+        public UserModel LoginAdmin(UserLogin loginAccount);
         public UserModel RegisterCustomer(UserModel registerAccount);
-        public List<UserModel> GetAllDocs();
-        public UserModel GetDocDetail(string EmailID);
+        //public List<UserModel> GetAllDocs();
+        //public UserModel GetDocDetail(string EmailID);
     }
 }

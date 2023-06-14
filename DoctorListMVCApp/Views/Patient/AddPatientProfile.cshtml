@@ -1,0 +1,89 @@
+﻿@model CommonLayer.Models.PatientModel
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "AddPatientProfile";
+}
+
+<h1>AddPatientProfile</h1>
+
+<h4>PatientModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddPatientProfile">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="PatientID" class="control-label"></label>
+                <input asp-for="PatientID" class="form-control" />
+                <span asp-validation-for="PatientID" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="DOB" class="control-label"></label>
+                <input asp-for="DOB" type="date" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Gender" class="form-control" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodGroup" class="control-label"></label>
+                <input asp-for="BloodGroup" class="form-control" />
+                <span asp-validation-for="BloodGroup" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PatientImage" class="control-label"></label>
+                <input asp-for="PatientImage" class="form-control" />
+                <span asp-validation-for="PatientImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HealthConcern" class="control-label"></label>
+                <input asp-for="HealthConcern" class="form-control" />
+                <span asp-validation-for="HealthConcern" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalHistory" class="control-label"></label>
+                <input asp-for="MedicalHistory" class="form-control" />
+                <span asp-validation-for="MedicalHistory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InsuranceProvider" class="control-label"></label>
+                <input asp-for="InsuranceProvider" class="form-control" />
+                <span asp-validation-for="InsuranceProvider" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label"></label>
+                <input asp-for="UserID" class="form-control" value=@Context.Session.GetInt32("UserID") readonly />
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            @*<div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Istrash" /> @Html.DisplayNameFor(model => model.Istrash)
+                </label>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="CreatedAt" class="control-label"></label>
+                <input asp-for="CreatedAt" class="form-control" />
+                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedAt" class="control-label"></label>
+                <input asp-for="UpdatedAt" class="form-control" />
+                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
