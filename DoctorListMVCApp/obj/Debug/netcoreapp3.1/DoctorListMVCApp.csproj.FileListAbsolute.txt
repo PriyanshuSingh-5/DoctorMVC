@@ -133,3 +133,5 @@ C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcorea
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\GetAllDoc.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Accept.cshtml.g.cs
 C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Patient\GetPatientDetails.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Doctor\AddDoctorProfile.cshtml.g.cs
+C:\Users\Admin\source\repos\DoctorListMVCApp\DoctorListMVCApp\obj\Debug\netcoreapp3.1\Razor\Views\Doctor\GetDoctorDetails.cshtml.g.cs

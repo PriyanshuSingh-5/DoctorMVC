@@ -18,5 +18,13 @@ namespace BusinessLayer.Services
         {
             return this.repo.GetDocDetail(EmailID);
         }
+        public DoctorModel AddDocDetails(DoctorModel Account)
+        {
+            return repo.AddDocDetails(Account);
+        }
+        public DoctorModel GetDoctorDetails(int UserID)
+        {
+            return repo.GetDoctorDetails(UserID);
+        }
     }
 }
