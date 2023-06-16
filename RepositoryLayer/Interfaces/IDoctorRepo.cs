@@ -10,5 +10,7 @@ namespace RepositoryLayer.Interfaces
         public UserModel GetDocDetail(string EmailID);
         public DoctorModel AddDocDetails(DoctorModel Account);
         public DoctorModel GetDoctorDetails(int UserID);
+        public ScheduleModel AddScheduleAndLocation(ScheduleModel schedule);
+        public List<ScheduleModel> GetAllSchedules(int DoctorID);
     }
 }

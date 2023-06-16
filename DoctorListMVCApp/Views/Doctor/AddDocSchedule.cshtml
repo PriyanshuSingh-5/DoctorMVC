@@ -1,0 +1,49 @@
+﻿@model CommonLayer.Models.ScheduleModel
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "AddDocSchedule";
+}
+
+<h1>AddDocSchedule</h1>
+
+<h4>ScheduleModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddDocSchedule">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="ScheduleId" class="control-label"></label>
+                <input asp-for="ScheduleId" class="form-control" />
+                <span asp-validation-for="ScheduleId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="ScheduleTime" class="control-label"></label>
+                <input asp-for="ScheduleTime" class="form-control" type="time" />
+                <span asp-validation-for="ScheduleTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorID" class="control-label"></label>
+                <input asp-for="DoctorID" class="form-control" value=@Context.Session.GetInt32("DoctorID") />
+                <span asp-validation-for="DoctorID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

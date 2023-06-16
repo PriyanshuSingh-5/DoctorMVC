@@ -77,11 +77,46 @@ namespace DoctorListMVCApp.Controllers
             }
             DoctorModel user = doctorBusiness.GetDoctorDetails(UserID);
 
-            if (user == null)
+            if (user != null)
             {
-                return NotFound();
+                HttpContext.Session.SetInt32("DoctorID", user.DoctorID);
+                return View(user);
             }
-            return View(user);
+            return View();
+           
+        }
+
+        [HttpGet]
+        public IActionResult AddDocSchedule()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddDocSchedule(ScheduleModel schedule)
+        {
+            if (ModelState.IsValid)
+            {
+               
+                int DoctorID = (int)HttpContext.Session.GetInt32("DoctorID");
+                var result = doctorBusiness.AddScheduleAndLocation(schedule);
+                
+                return RedirectToAction("GetAllDoc", "Admin");
+
+                
+
+            }
+            return View(schedule);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllSchedules()
+        {
+            int DoctorID = (int)HttpContext.Session.GetInt32("DoctorID");
+            List<ScheduleModel> list = new List<ScheduleModel>();
+            list = doctorBusiness.GetAllSchedules(DoctorID).ToList();
+
+            return View(list);
         }
     }
 }

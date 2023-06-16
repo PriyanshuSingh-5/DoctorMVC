@@ -69,8 +69,7 @@ Create table ScheduleLocation(
 ScheduleId int primary key Identity(1,1),
 ScheduleTime time,
 Location varchar(250),
-UserID int FOREIGN KEY REFERENCES Users(UserID),
-RoleID int FOREIGN KEY REFERENCES Roles(RoleID)
+DoctorID int FOREIGN KEY REFERENCES DoctorProfile(DoctorID),
 )
 drop table ScheduleLocation
 
@@ -88,7 +87,20 @@ Qualification varchar(150),
 Experience float,
 UserID int FOREIGN KEY REFERENCES Users(UserID),
 RoleID int FOREIGN KEY REFERENCES Roles(RoleID),
+ServiceId int FOREIGN KEY REFERENCES Services(ServiceId),
 IsTrash bit,
 CreatedAt datetime,
 UpdatedAt datetime
 )
+drop table DoctorProfile
+Alter table DoctorProfile
+ADD CONSTRAINT istrash
+DEFAULT '0' FOR IsTrash
+
+ALTER TABLE DoctorProfile
+ADD CategoryID int FOREIGN KEY REFERENCES Category(CategoryID);
+
+ALTER TABLE DoctorProfile
+DROP COLUMN ServiceId;
+
+alter table DoctorProfile drop constraint FK__DoctorPro__Servi__57DD0BE4;

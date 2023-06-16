@@ -120,5 +120,55 @@ namespace RepositoryLayer.Services
                 connection.Close();
             }
         }
+
+        public List<PatientModel> GetAllPatientProfile()
+        {
+            //SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                List<PatientModel> patients = new List<PatientModel>();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetAllPatients", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+                    if (Reader.HasRows)
+                    {
+                        while (Reader.Read())
+                        {
+                            PatientModel docs = new PatientModel()
+                            {
+                                UserID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt32("UserID"),
+                                PatientID = Reader.IsDBNull("PatientID") ? 0 : Reader.GetInt32("PatientID"),
+                                PatientImage = Reader.IsDBNull("PatientImage") ? string.Empty : Reader.GetString("PatientImage"),
+                                DOB = Reader.GetDateTime(1),
+                                HealthConcern = Reader.IsDBNull("HealthConcern") ? string.Empty : Reader.GetString("HealthConcern"),
+                                MedicalHistory = Reader.IsDBNull("MedicalHistory") ? string.Empty : Reader.GetString("MedicalHistory"),
+                                Gender = Reader.IsDBNull("Gender") ? string.Empty : Reader.GetString("Gender"),
+
+                            };
+                            patients.Add(docs);
+                        }
+                        return patients;
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }

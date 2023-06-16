@@ -169,5 +169,164 @@ namespace RepositoryLayer.Services
                 connection.Close();
             }
         }
+
+        public List<DoctorModel> GetAllDoctorProfile()
+        {
+            //SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                List<DoctorModel> books = new List<DoctorModel>();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetAllDoctorProfiles", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+                    if (Reader.HasRows)
+                    {
+                        while (Reader.Read())
+                        {
+                            DoctorModel docs = new DoctorModel()
+                            {
+                                UserID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt32("UserID"),
+                                DoctorID = Reader.IsDBNull("DoctorID") ? 0 : Reader.GetInt32("DoctorID"),
+                                DoctorImage = Reader.IsDBNull("DoctorImage") ? string.Empty : Reader.GetString("DoctorImage"),
+                                Qualification = Reader.IsDBNull("Qualification") ? string.Empty : Reader.GetString("Qualification"),
+                                Experience = Reader.IsDBNull("Experience") ? 0 : Reader.GetDouble("Experience"),
+                                CategoryID = Reader.IsDBNull("CategoryID") ? 0 : Reader.GetInt32("CategoryID"),
+                                Gender = Reader.IsDBNull("Gender") ? string.Empty : Reader.GetString("Gender"),
+                              
+                            };
+                            books.Add(docs);
+                        }
+                        return books;
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+
+        public ScheduleModel AddScheduleAndLocation(ScheduleModel schedule)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("uspAddScheduleWithLocation", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("ScheduleTime", schedule.ScheduleTime);
+                cmd.Parameters.AddWithValue("Location", schedule.Location);
+                cmd.Parameters.AddWithValue("DoctorID", schedule.DoctorID);
+                
+                var returnParameter = cmd.Parameters.Add("@Result", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                ScheduleModel model = new ScheduleModel();
+                SqlDataReader rd = cmd.ExecuteReader();
+                var result = returnParameter.Value;
+                if (result != null && result.Equals(0))
+                {
+                    throw new Exception("No data added");
+                }
+                if (rd.Read())
+                {
+                    model.DoctorID = rd["DoctorID"] == DBNull.Value ? default : rd.GetInt32("DoctorID");
+                    //DateTime time = rd.GetDateTime(1);
+                    // model.ScheduleTime = time.ToString("hh':'mm':'ss");
+                    // Read the DateTime value from the column
+                    //DateTime scheduleDateTime = rd.GetDateTime(1);
+
+                    //// Extract the time component as a TimeSpan
+                    //TimeSpan timeValue = scheduleDateTime.TimeOfDay;
+
+                    //// Process the time value as needed
+                    //model.ScheduleTime = DateTime.Today.Add(timeValue);
+                    //string timeString = rd.GetTimeSpan(0).ToString();
+
+                    //// Extract the hours and minutes part
+                    //string formattedTime = timeString.Substring(0, 5);
+                    model.ScheduleTime = rd.GetTimeSpan(1);
+                    //// Assign the formatted time to the docs.DOB property
+                    //model.ScheduleTime = formattedTime;
+                    model.Location = rd["Location"] == DBNull.Value ? default : rd.GetString("Location");
+                   
+                }
+
+                return model;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        public List<ScheduleModel> GetAllSchedules(int DoctorID)
+        {
+            //SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                List<ScheduleModel> schedules = new List<ScheduleModel>();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetAllScheduleOfDOC", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("DoctorID", DoctorID);
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+                    if (Reader.HasRows)
+                    {
+                        while (Reader.Read())
+                        {
+                            ScheduleModel docs = new ScheduleModel()
+                            {
+                                DoctorID = Reader.IsDBNull("DoctorID") ? 0 : Reader.GetInt32("DoctorID"),
+                                ScheduleTime = Reader.GetTimeSpan(1),
+                                Location = Reader.IsDBNull("Location") ? string.Empty : Reader.GetString("Location"),
+                                
+                            };
+                            schedules.Add(docs);
+                        }
+                        return schedules;
+                    }
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }

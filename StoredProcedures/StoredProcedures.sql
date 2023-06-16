@@ -355,3 +355,439 @@ END CATCH
 	
 END
 GO
+
+
+
+----Adding patient Details---
+Alter  PROCEDURE uspAddPatientProfile
+	-- Add the parameters for the stored procedure here
+	@DOB date,
+@Gender varchar(25),
+@BloodGroup char(3),
+@PatientImage varchar(255),
+@HealthConcern varchar(50),
+@MedicalHistory varchar(255),
+@InsuranceProvider varchar(50),
+@UserID int ,
+@CreatedAt datetime,
+@UpdatedAt datetime
+	
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+
+	DECLARE @Identity table (ID nvarchar(100));
+	DECLARE @new_identity nvarchar(100);
+	DECLARE @result int = 0;
+	DECLARE @PatientID varchar;
+
+	
+
+	insert into PatientProfile(DOB,
+	Gender,
+	BloodGroup,
+	PatientImage,HealthConcern,MedicalHistory,InsuranceProvider,UserID,CreatedAt,UpdatedAt) output Inserted.PatientID into @Identity
+	values(@DOB,
+	@Gender,
+	@BloodGroup,
+	@PatientImage,@HealthConcern,@MedicalHistory,@InsuranceProvider,@UserID,@CreatedAt,@UpdatedAt);
+
+--	SELECT @new_identity = (select ID from @Identity);
+
+	select PatientID,
+	DOB,
+	Gender,
+	BloodGroup,
+	PatientImage,HealthConcern,MedicalHistory,InsuranceProvider,UserID,Istrash,CreatedAt,UpdatedAt
+	from PatientProfile where PatientID = (select ID from @Identity);
+	set @result = 1;
+COMMIT TRANSACTION;	
+
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+
+-----Get Patient By Id--
+Alter   PROCEDURE uspGetPatientById
+	-- Add the parameters for the stored procedure here
+	@UserID int
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+	DECLARE @result int = 0;
+	if((select count(*) from PatientProfile where UserID = @UserID) = 0)
+	begin
+		set @result = 2; 
+		throw 5000,'Patient dont exist',-1;
+	end
+	select * from PatientProfile where UserID = @UserID;
+	
+COMMIT TRANSACTION;	
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+GO
+
+
+------Adding doctordetails---
+Alter  PROCEDURE uspAddDoctorProfile
+	-- Add the parameters for the stored procedure here
+@DoctorImage varchar(255),
+@Age int,
+@Gender varchar(25),
+@Qualification varchar(150),
+@Experience float,
+@UserID int,
+@RoleID int,
+@CreatedAt datetime,
+@UpdatedAt datetime,
+@CategoryID int
+	
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+
+	DECLARE @Identity table (ID nvarchar(100));
+	DECLARE @new_identity nvarchar(100);
+	DECLARE @result int = 0;
+	DECLARE @DoctorID varchar;
+
+	
+
+	insert into DoctorProfile(DoctorImage ,
+Age,
+Gender ,
+Qualification ,
+Experience ,
+UserID ,
+RoleID ,
+
+CreatedAt ,
+UpdatedAt,CategoryID  ) output Inserted.DoctorID into @Identity
+	values(@DoctorImage ,
+@Age ,
+@Gender ,
+@Qualification ,
+@Experience ,
+@UserID ,
+@RoleID ,
+ 
+@CreatedAt ,
+@UpdatedAt,@CategoryID );
+
+--	SELECT @new_identity = (select ID from @Identity);
+
+	select DoctorID,
+	DoctorImage ,
+Age,
+Gender ,
+Qualification ,
+Experience ,
+UserID ,
+RoleID ,
+CreatedAt ,
+UpdatedAt,CategoryID  
+	from DoctorProfile where DoctorID = (select ID from @Identity);
+	set @result = 1;
+COMMIT TRANSACTION;	
+
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+
+exec uspAddDoctorProfile 'jpg',39,'Female','MBBS','7 years',2,3,'2023-06-15 12:38:00','2023-06-15 12:38:00',2
+insert into DoctorProfile(DoctorImage ,
+Age,
+Gender ,
+Qualification ,
+Experience ,
+UserID ,
+RoleID ,
+
+CreatedAt ,
+UpdatedAt,CategoryID  )
+	values('jpg',39,'Female','MBBS','7 years',2,3,'2023-06-15 12:38:00','2023-06-15 12:38:00',2 );
+
+select DoctorID,
+	DoctorImage ,
+Age,
+Gender ,
+Qualification ,
+Experience ,
+UserID ,
+RoleID ,
+CreatedAt ,
+UpdatedAt,CategoryID  
+	from DoctorProfile where DoctorID = 0;
+-----Get Doctor By Id--
+create   PROCEDURE uspGetDoctorById
+	-- Add the parameters for the stored procedure here
+	@UserID int
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+	DECLARE @result int = 0;
+	if((select count(*) from DoctorProfile where UserID = @UserID) = 0)
+	begin
+		set @result = 2; 
+		throw 5000,'Doctor dont exist',-1;
+	end
+	select * from DoctorProfile where UserID = @UserID;
+	
+COMMIT TRANSACTION;	
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+GO
+
+
+----GetAllDoctors---
+CREATE   PROCEDURE uspGetAllDoctorProfiles
+	-- Add the parameters for the stored procedure here
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+	DECLARE @result int = 0;
+
+	select * from DoctorProfile  
+	set @result = 1;
+COMMIT TRANSACTION;	
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+GO
+
+
+---GetAll Patients---
+CREATE   PROCEDURE uspGetAllPatients
+	-- Add the parameters for the stored procedure here
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+	DECLARE @result int = 0;
+
+	select * from PatientProfile 
+	set @result = 1;
+COMMIT TRANSACTION;	
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+GO
+
+
+
+-----Add doctor schedule with location-----
+Create   PROCEDURE uspAddScheduleWithLocation
+	-- Add the parameters for the stored procedure here
+	@ScheduleTime time,
+	@Location varchar(250),
+	@DoctorID int
+	
+	
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+
+	DECLARE @Identity table (ID nvarchar(100));
+	DECLARE @new_identity nvarchar(100);
+	DECLARE @result int = 0;
+	DECLARE @ScheduleId varchar;
+
+	
+
+	insert into ScheduleLocation(ScheduleTime,
+	Location,
+	DoctorID
+	) output Inserted.ScheduleID into @Identity
+	values(@ScheduleTime,
+	@Location,
+	@DoctorID);
+
+--	SELECT @new_identity = (select ID from @Identity);
+
+	select ScheduleId,
+	ScheduleTime,
+	Location,
+	DoctorID
+	from ScheduleLocation where ScheduleId = (select ID from @Identity);
+	set @result = 1;
+COMMIT TRANSACTION;	
+
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END

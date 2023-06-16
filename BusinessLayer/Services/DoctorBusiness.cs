@@ -26,5 +26,13 @@ namespace BusinessLayer.Services
         {
             return repo.GetDoctorDetails(UserID);
         }
+        public ScheduleModel AddScheduleAndLocation(ScheduleModel schedule)
+        {
+            return repo.AddScheduleAndLocation(schedule);
+        }
+        public List<ScheduleModel> GetAllSchedules(int DoctorID)
+        {
+            return repo.GetAllSchedules(DoctorID);
+        }
     }
 }
