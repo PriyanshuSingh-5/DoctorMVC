@@ -22,5 +22,13 @@ namespace BusinessLayer.Services
         {
             return repo.GetPatientDetails(UserID);
         }
+        public AppointmentModel AddAppointments(AppointmentModel Account)
+        {
+            return repo.AddAppointments(Account);
+        }
+        public List<AppointmentModel> GetAppointmentByPatientID(int PatientID)
+        {
+            return repo.GetAppointmentByPatientID(PatientID);
+        }
     }
 }

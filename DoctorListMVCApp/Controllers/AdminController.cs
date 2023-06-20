@@ -57,5 +57,16 @@ namespace DoctorListMVCApp.Controllers
             mSMQModel.SendMessage(EmailID, result.FullName);
             return RedirectToAction("GetAllDoc");
         }
+
+
+        [HttpGet]
+        public IActionResult GetAllAppointmentsAdmin()
+        {
+            List<AppointmentModel> list = new List<AppointmentModel>();
+            list = adminBusness.GetAllAppointment().ToList();
+
+            return View(list);
+        }
+
     }
 }

@@ -72,5 +72,58 @@ namespace RepositoryLayer.Services
                 }
             }
         }
+
+        public List<AppointmentModel> GetAllAppointment()
+        {
+            try
+            {
+
+                List<AppointmentModel> data = new List<AppointmentModel>();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetAllAppointments", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    //command.Parameters.AddWithValue("PatientID", PatientID);
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+                    if (Reader.HasRows)
+                    {
+
+                        while (Reader.Read())
+                        {
+                            AppointmentModel docs = new AppointmentModel()
+                            {
+
+                                // docs.DoctorID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt32("UserID");
+                                DoctorID = Reader.IsDBNull("DoctorID") ? 0 : Reader.GetInt32("DoctorID"),
+                                //docs.DOB = Reader.GetDateTime(1);
+                                Appointmentdate = Reader.GetDateTime(2),
+                                StartTime = Reader.GetTimeSpan(3),
+                                EndTime = Reader.GetTimeSpan(4)
+                                //docs.Gender = Reader.IsDBNull("Gender") ? string.Empty : Reader.GetString("Gender");
+                            };
+                            data.Add(docs);
+
+
+                        }
+                        return data;
+
+                    }
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

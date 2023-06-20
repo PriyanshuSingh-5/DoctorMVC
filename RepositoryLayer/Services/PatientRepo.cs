@@ -170,5 +170,120 @@ namespace RepositoryLayer.Services
                 }
             }
         }
+
+
+
+        /* Appointment APIS */
+
+        public AppointmentModel AddAppointments(AppointmentModel Account)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("uspAddAppointment", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("Concerns", Account.Concerns);
+                cmd.Parameters.AddWithValue("Appointmentdate", Account.Appointmentdate);
+                cmd.Parameters.AddWithValue("StartTime", Account.StartTime);
+                cmd.Parameters.AddWithValue("EndTime", Account.EndTime);
+                cmd.Parameters.AddWithValue("DoctorID", Account.DoctorID);
+                cmd.Parameters.AddWithValue("PatientID", Account.PatientID);
+                cmd.Parameters.AddWithValue("ScheduleID", Account.ScheduleID);
+                cmd.Parameters.AddWithValue("CreatedAt", DateTime.Now);
+                cmd.Parameters.AddWithValue("UpdatedAt", DateTime.Now);
+                var returnParameter = cmd.Parameters.Add("@Result", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                AppointmentModel appointment = new AppointmentModel();
+                SqlDataReader rd = cmd.ExecuteReader();
+                var result = returnParameter.Value;
+                if (result != null && result.Equals(0))
+                {
+                    throw new Exception("No data added");
+                }
+                if (rd.Read())
+                {
+                    appointment.DoctorID= rd["DoctorID"] == DBNull.Value ? default : rd.GetInt32("DoctorID");
+                    appointment.PatientID = rd["PatientID"] == DBNull.Value ? default : rd.GetInt32("PatientID");
+                    appointment.Concerns = rd["Concerns"] == DBNull.Value ? default : rd.GetString("Concerns");
+                    appointment.Appointmentdate = rd.GetDateTime(2);
+                    appointment.StartTime = rd.GetTimeSpan(3);
+                    appointment.EndTime = rd.GetTimeSpan(4);
+                   
+                }
+
+                return appointment;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        public List<AppointmentModel> GetAppointmentByPatientID(int PatientID)
+        {
+            try
+            {
+
+                List<AppointmentModel> data = new List<AppointmentModel>();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetAppointmentByPatientID", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("PatientID", PatientID);
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+                    if (Reader.HasRows)
+                    {
+
+                        while (Reader.Read())
+                        {
+                            AppointmentModel docs = new AppointmentModel()
+                            {
+
+                                // docs.DoctorID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt32("UserID");
+                                DoctorID = Reader.IsDBNull("DoctorID") ? 0 : Reader.GetInt32("DoctorID"),
+                                //docs.DOB = Reader.GetDateTime(1);
+                                Appointmentdate = Reader.GetDateTime(2),
+                                StartTime = Reader.GetTimeSpan(3),
+                                EndTime = Reader.GetTimeSpan(4)
+                                //docs.Gender = Reader.IsDBNull("Gender") ? string.Empty : Reader.GetString("Gender");
+                            };
+                            data.Add(docs);
+
+
+                        }
+                        return data;
+
+                    }
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+       
+
+
     }
 }

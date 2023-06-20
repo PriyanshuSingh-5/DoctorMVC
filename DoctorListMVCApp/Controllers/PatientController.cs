@@ -60,11 +60,49 @@ namespace DoctorListMVCApp.Controllers
             }
             PatientModel user = patient.GetPatientDetails(UserID);
 
-            if (user == null)
+            if (user != null)
             {
-                return NotFound();
+                HttpContext.Session.SetInt32("PatientID", user.PatientID);
+                return View(user);
             }
-            return View(user);
+             //HttpContext.Session.SetInt32("PatientID", user.PatientID);
+                return NotFound();
+               
+            
+        }
+
+
+        [HttpGet]
+        public IActionResult AddAppointment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddAppointment(AppointmentModel add)
+        {
+            if (ModelState.IsValid)
+            {
+               int PatientID= (int)HttpContext.Session.GetInt32("PatientID");
+                int DoctorID = (int)HttpContext.Session.GetInt32("DoctorID");
+                //int UserID = (int)HttpContext.Session.GetInt32("UserID");
+                var result = patient.AddAppointments(add);
+                return RedirectToAction("GetAllDoc", "Admin");
+
+               
+
+            }
+            return View(add);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllAppointmentbyPatient()
+        {
+            int PatientID = (int)HttpContext.Session.GetInt32("PatientID");
+            List<AppointmentModel> list = new List<AppointmentModel>();
+            list = patient.GetAppointmentByPatientID(PatientID).ToList();
+
+            return View(list);
         }
 
     }

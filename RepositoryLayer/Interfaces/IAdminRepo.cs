@@ -8,5 +8,6 @@ namespace RepositoryLayer.Interfaces
     public interface IAdminRepo
     {
         public List<UserModel> GetAllDocs();
+        public List<AppointmentModel> GetAllAppointment();
     }
 }

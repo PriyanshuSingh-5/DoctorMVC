@@ -170,6 +170,54 @@ namespace RepositoryLayer.Services
             }
         }
 
+
+        public DoctorModel GetDoctorByDocID(int DoctorID)
+        {
+            try
+            {
+                //UserModel books = new UserModel();
+                DoctorModel docs = new DoctorModel();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetDoctorByDocId", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("DoctorID", DoctorID);
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+
+                    while (Reader.Read())
+                    {
+
+
+                        docs.UserID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt32("UserID");
+                        docs.DoctorID = Reader.IsDBNull("DoctorID") ? 0 : Reader.GetInt32("DoctorID");
+                        //docs.DOB = Reader.GetDateTime(1);
+                        docs.DoctorImage = Reader.IsDBNull("DoctorImage") ? string.Empty : Reader.GetString("DoctorImage");
+                        docs.Qualification = Reader.IsDBNull("Qualification") ? string.Empty : Reader.GetString("Qualification");
+                        docs.Experience = Reader.IsDBNull("Experience") ? 0 : Reader.GetDouble("Experience");
+                        docs.Gender = Reader.IsDBNull("Gender") ? string.Empty : Reader.GetString("Gender");
+
+
+                        //books.Add(docs);
+                    }
+                    return docs;
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         public List<DoctorModel> GetAllDoctorProfile()
         {
             //SqlConnection connection = new SqlConnection(connectionString);
@@ -326,6 +374,61 @@ namespace RepositoryLayer.Services
                 {
                     connection.Close();
                 }
+            }
+        }
+
+
+        /* Appointments APIS */
+        public List<AppointmentModel> GetAppointmentByDocID(int DoctorID)
+        {
+            try
+            {
+
+                List<AppointmentModel> data = new List<AppointmentModel>();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetAppointmentByDocId", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("DoctorID", DoctorID);
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+                    if (Reader.HasRows)
+                    {
+
+                        while (Reader.Read())
+                        {
+                            AppointmentModel docs = new AppointmentModel()
+                            {
+
+                                // docs.DoctorID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt32("UserID");
+                                DoctorID = Reader.IsDBNull("DoctorID") ? 0 : Reader.GetInt32("DoctorID"),
+                                //docs.DOB = Reader.GetDateTime(1);
+                                Appointmentdate = Reader.GetDateTime(2),
+                                StartTime = Reader.GetTimeSpan(3),
+                                EndTime = Reader.GetTimeSpan(4)
+                                //docs.Gender = Reader.IsDBNull("Gender") ? string.Empty : Reader.GetString("Gender");
+                            };
+                            data.Add(docs);
+
+
+                        }
+                        return data;
+
+                    }
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
             }
         }
     }

@@ -18,5 +18,9 @@ namespace BusinessLayer.Services
         {
             return adminRepo.GetAllDocs();
         }
+        public List<AppointmentModel> GetAllAppointment()
+        {
+            return adminRepo.GetAllAppointment();
+        }
     }
 }

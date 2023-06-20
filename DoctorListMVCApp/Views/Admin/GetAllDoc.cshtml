@@ -4,12 +4,13 @@
     ViewData["Title"] = "GetAllDoc";
 }
 
+<div class="main">
 <h1>GetAllDoc</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -41,47 +42,64 @@
             </th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
+    </thead>*@
+@*<tbody>*@
+@foreach (var item in Model)
+{
     var RoleId = item.RoleID;
-    if (RoleId != 1 && RoleId!= 2)
+    if (RoleId != 1 && RoleId != 2)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoleID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAccepted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.ActionLink("Accept", "Accept", new { EmailID = item.EmailID }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+<div class="col-md-4 mt-3">
+    
+        <div class="card">
+            <a href="@Url.Action("GetDocDetails", "Doctor", new { EmailID = item.EmailID })">
+            <div class="card-header">
+                <h3>@item.FullName.</h3>
+            </div>
+            <div class="card-body">
+                <p>@item.EmailID</p>
+                <p>@item.ContactNo</p>
+                <p>@item.RoleID</p>
+            </div>
+        </div>
+</div>
+
+        @*<tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAccepted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    @Html.ActionLink("Accept", "Accept", new { EmailID = item.EmailID }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>*@
     }
 }
-    </tbody>
-</table>
+</div>
+@*</tbody>
+    </table>*@

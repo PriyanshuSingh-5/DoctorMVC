@@ -9,5 +9,7 @@ namespace BusinessLayer.Interfaces
     {
         public PatientModel AddPatientDetails(PatientModel Account);
         public PatientModel GetPatientDetails(int UserID);
+        public AppointmentModel AddAppointments(AppointmentModel Account);
+        public List<AppointmentModel> GetAppointmentByPatientID(int PatientID);
     }
 }

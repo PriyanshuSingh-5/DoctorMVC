@@ -8,5 +8,6 @@ namespace BusinessLayer.Interfaces
     public interface IAdminBussiness
     {
         public List<UserModel> GetAllDocs();
+        public List<AppointmentModel> GetAllAppointment();
     }
 }
