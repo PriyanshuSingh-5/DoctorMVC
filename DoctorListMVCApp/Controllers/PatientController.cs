@@ -26,7 +26,17 @@ namespace DoctorListMVCApp.Controllers
         [HttpGet]
         public IActionResult AddPatientProfile()
         {
-            return View();
+            int RoleID = (int)HttpContext.Session.GetInt32("RoleID");
+            if (RoleID  == 2)
+            {
+
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+
         }
 
         [HttpPost]
@@ -53,7 +63,10 @@ namespace DoctorListMVCApp.Controllers
         [HttpGet]
         public IActionResult GetPatientDetails(int UserID) 
         {
-             UserID = (int)HttpContext.Session.GetInt32("UserID");
+            int RoleID = (int)HttpContext.Session.GetInt32("RoleID");
+            if (RoleID == 2)
+            {
+                UserID = (int)HttpContext.Session.GetInt32("UserID");
             if (UserID == null)
             {
                 return NotFound();
@@ -67,15 +80,28 @@ namespace DoctorListMVCApp.Controllers
             }
              //HttpContext.Session.SetInt32("PatientID", user.PatientID);
                 return NotFound();
-               
-            
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+
         }
 
 
         [HttpGet]
         public IActionResult AddAppointment()
         {
-            return View();
+            int RoleID = (int)HttpContext.Session.GetInt32("RoleID");
+            if (RoleID == 2)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
         }
 
         [HttpPost]
@@ -98,11 +124,19 @@ namespace DoctorListMVCApp.Controllers
         [HttpGet]
         public IActionResult GetAllAppointmentbyPatient()
         {
-            int PatientID = (int)HttpContext.Session.GetInt32("PatientID");
+            int RoleID = (int)HttpContext.Session.GetInt32("RoleID");
+            if (RoleID == 2)
+            {
+                int PatientID = (int)HttpContext.Session.GetInt32("PatientID");
             List<AppointmentModel> list = new List<AppointmentModel>();
             list = patient.GetAppointmentByPatientID(PatientID).ToList();
 
             return View(list);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
         }
 
     }

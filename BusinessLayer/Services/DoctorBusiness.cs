@@ -22,6 +22,11 @@ namespace BusinessLayer.Services
         {
             return repo.AddDocDetails(Account);
         }
+
+        public DoctorModel UpdateDocDetails(DoctorModel Account)
+        {
+            return repo.UpdateDocDetails(Account);
+        }
         public DoctorModel GetDoctorDetails(int UserID)
         {
             return repo.GetDoctorDetails(UserID);

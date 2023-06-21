@@ -116,7 +116,7 @@ namespace DoctorListMVCApp.Controllers
                     else if (result.RoleID == 3 && result.IsAccepted)
                     {
                         //ViewBag.msg = "you are not authorized to login yet.";
-                        return RedirectToAction("GetAllDocProfile", "Doctor");
+                        return RedirectToAction("GetDoctorDetails", "Doctor");
                     }
                     else if(result.RoleID==2 && !result.IsAccepted)
                     {

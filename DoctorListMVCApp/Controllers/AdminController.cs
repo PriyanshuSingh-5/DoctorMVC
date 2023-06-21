@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using CommonLayer.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,26 +26,42 @@ namespace DoctorListMVCApp.Controllers
         [HttpGet]
         public IActionResult GetAllDoc()
         {
-            List<UserModel> lstEmployee = new List<UserModel>();
-            lstEmployee = adminBusness.GetAllDocs().ToList();
+            int RoleID = (int)HttpContext.Session.GetInt32("RoleID");
+            if (RoleID == 1)
+            {
+                List<UserModel> lstEmployee = new List<UserModel>();
+                lstEmployee = adminBusness.GetAllDocs().ToList();
 
-            return View(lstEmployee);
+                return View(lstEmployee);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
         }
 
         [HttpGet]
         public IActionResult Accept(string EmailID)
         {
-            if (EmailID == null)
+            int RoleID = (int)HttpContext.Session.GetInt32("RoleID");
+            if (RoleID == 1)
             {
-                return NotFound();
-            }
-            UserModel user = doctorBusiness.GetDocDetail(EmailID);
+                if (EmailID == null)
+                {
+                    return NotFound();
+                }
+                UserModel user = doctorBusiness.GetDocDetail(EmailID);
 
-            if (user == null)
-            {
-                return NotFound();
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                return View(user);
             }
-            return View(user);
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
         }
 
         [HttpPost, ActionName("Accept")]
@@ -62,11 +79,20 @@ namespace DoctorListMVCApp.Controllers
         [HttpGet]
         public IActionResult GetAllAppointmentsAdmin()
         {
-            List<AppointmentModel> list = new List<AppointmentModel>();
-            list = adminBusness.GetAllAppointment().ToList();
+            int RoleID = (int)HttpContext.Session.GetInt32("RoleID");
+            if (RoleID == 1 || RoleID == 2)
+            {
 
-            return View(list);
+                List<AppointmentModel> list = new List<AppointmentModel>();
+                list = adminBusness.GetAllAppointment().ToList();
+
+                return View(list);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
+
         }
-
     }
 }

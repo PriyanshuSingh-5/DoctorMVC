@@ -104,3 +104,22 @@ ALTER TABLE DoctorProfile
 DROP COLUMN ServiceId;
 
 alter table DoctorProfile drop constraint FK__DoctorPro__Servi__57DD0BE4;
+
+
+
+create table Appointment(
+AppointmentID int Primary key identity(1,1),
+Concerns varchar(255),
+Appointmentdate Date,
+StartTime time,
+EndTime time,
+IsActive bit default '0',
+IsTrash bit default '0',
+DoctorID int FOREIGN KEY REFERENCES DoctorProfile(DoctorID),
+PatientID int FOREIGN KEY REFERENCES PatientProfile(PatientID),
+ScheduleID int FOREIGN KEY REFERENCES ScheduleLocation(ScheduleID),
+CreatedAt datetime,
+UpdatedAt datetime
+)
+
+drop table Appointment

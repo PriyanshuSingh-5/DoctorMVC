@@ -9,6 +9,7 @@ namespace BusinessLayer.Interfaces
     {
         public UserModel GetDocDetail(string EmailID);
         public DoctorModel AddDocDetails(DoctorModel Account);
+        public DoctorModel UpdateDocDetails(DoctorModel Account);
         public DoctorModel GetDoctorDetails(int UserID);
         public DoctorModel GetDoctorByDocID(int DoctorID);
         public ScheduleModel AddScheduleAndLocation(ScheduleModel schedule);

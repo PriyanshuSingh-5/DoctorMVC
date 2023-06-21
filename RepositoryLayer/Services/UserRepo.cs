@@ -50,6 +50,7 @@ namespace RepositoryLayer.Services
                 if (rd.Read())
                 {
                     user.UserID = rd["UserID"] == DBNull.Value ? default : rd.GetInt32("UserID");
+                    user.UserID = rd.GetInt32(0);
                     user.FullName = rd["FullName"] == DBNull.Value ? default : rd.GetString("FullName");
                     user.EmailID = rd["EmailID"] == DBNull.Value ? default : rd.GetString("EmailID");
                     user.Password = rd["Password"] == DBNull.Value ? default : rd.GetString("Password");
