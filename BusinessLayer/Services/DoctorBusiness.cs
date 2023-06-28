@@ -53,5 +53,9 @@ namespace BusinessLayer.Services
         {
             return repo.GetAppointmentByDocID(DoctorID);
         }
+        public AppointmentModel ConfirmAppointment(int PatientID)
+        {
+            return repo.ConfirmAppointment(PatientID);
+        }
     }
 }

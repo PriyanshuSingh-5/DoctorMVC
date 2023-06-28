@@ -12,6 +12,7 @@ namespace DoctorListMVCApp.Controllers
     public class DoctorController : Controller
     {
         private readonly IDoctorBusiness doctorBusiness;
+        private readonly IPatientBusiness patientBusiness;
 
         public DoctorController(IDoctorBusiness doctorBusiness)
         {
@@ -256,5 +257,37 @@ namespace DoctorListMVCApp.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Accept(int PatientID)
+        {
+            PatientID = (int)HttpContext.Session.GetInt32("PatientID");
+            int UserID =(int)HttpContext.Session.GetInt32("UserID");
+
+            if (PatientID == null)
+            {
+                return NotFound();
+            }
+            PatientModel user = patientBusiness.GetPatientDetails(UserID);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+
+        }
+
+        //[HttpPost, ActionName("Accept")]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult AcceptConfirmed(string EmailID)
+        //{
+        //  int  PatientID = (int)HttpContext.Session.GetInt32("PatientID");
+        //    var user = doctorBusiness.ConfirmAppointment(PatientID);
+        //    //var result = user.Find(a => a.EmailID == EmailID);
+        //    MSMQ mSMQModel = new MSMQ();
+        //    mSMQModel.SendMessage(EmailID, result.FullName);
+        //    return RedirectToAction("GetAllDoc");
+        //}
     }
 }

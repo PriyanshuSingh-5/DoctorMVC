@@ -1120,13 +1120,23 @@ Experience=3.7 ,
 UpdatedAt='2023-06-21',
 CategoryID=2   where DoctorID=8;
 
+select DoctorID,
+	DoctorImage ,
+Age,
+Gender ,
+Qualification ,
+Experience ,
+CreatedAt ,
+UpdatedAt,CategoryID  
+	from DoctorProfile where DoctorID = 8;
 
-exec uspUpdateDOCProflie 1,'png',34,'female','MBBS','3.5','2023-06-21', 2
+
+exec uspUpdateDOCProflie 8,'png',38,'female','MBBS',3.5,'2023-06-21', 2
 ------UpdateDocProfile----
 alter PROCEDURE uspUpdateDOCProflie
 	
-	@DoctorID int,
-	@DoctorImage varchar(255),
+@DoctorID int,
+@DoctorImage varchar(255),
 @Age int,
 @Gender varchar(25),
 @Qualification varchar(150),
@@ -1145,7 +1155,7 @@ BEGIN TRANSACTION;
 
 	DECLARE @Identity table (ID nvarchar(100));
 	DECLARE @new_identity nvarchar(100);
-	DECLARE @result int = 0;
+	DECLARE @result int = 0 ;
 	
 	if((select count(*) from DoctorProfile where DoctorID = @DoctorID) = 0)
 	begin
@@ -1158,7 +1168,7 @@ BEGIN TRANSACTION;
 Age=@Age,
 Gender=@Gender ,
 Qualification=@Qualification ,
-Experience=@Qualification ,
+Experience=@Experience ,
 UpdatedAt=@UpdatedAt,
 CategoryID=@CategoryID   where DoctorID=@DoctorID;
 
@@ -1173,6 +1183,7 @@ Experience ,
 CreatedAt ,
 UpdatedAt,CategoryID  
 	from DoctorProfile where DoctorID = @DoctorID;
+
 	set @result = 1;
 COMMIT TRANSACTION;	
 return @result;
@@ -1198,3 +1209,56 @@ ELSE IF(XACT_STATE()) = 1
 END CATCH
 	
 END
+
+
+
+
+-----modified one----
+alter PROCEDURE uspUpdateDOCProflie
+@DoctorID int,
+@DoctorImage varchar(255),
+@Age int,
+@Gender varchar(25),
+@Qualification varchar(150),
+@Experience float,
+@UpdatedAt datetime,
+@CategoryID int
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+
+
+
+	
+	DECLARE @result int = 0;
+		
+	if((select count(*) from DoctorProfile where DoctorID = @DoctorID) = 1)
+	begin
+	Update DoctorProfile set DoctorImage=@DoctorImage ,
+Age=@Age,
+Gender=@Gender ,
+Qualification=@Qualification ,
+Experience=@Experience ,
+UpdatedAt=@UpdatedAt,
+CategoryID=@CategoryID  where DoctorID=@DoctorID;
+		set @result = 1;
+	end
+	
+
+
+--	SELECT @new_identity = (select ID from @Identity);
+
+
+	
+	
+return @result;
+
+
+	
+END
+GO
+
+

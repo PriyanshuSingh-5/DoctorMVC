@@ -11,5 +11,6 @@ namespace BusinessLayer.Interfaces
         public PatientModel GetPatientDetails(int UserID);
         public AppointmentModel AddAppointments(AppointmentModel Account);
         public List<AppointmentModel> GetAppointmentByPatientID(int PatientID);
+        public AppointmentModel ConfirmAppointment(int PatientID);
     }
 }

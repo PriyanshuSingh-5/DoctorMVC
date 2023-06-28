@@ -76,6 +76,7 @@ namespace DoctorListMVCApp.Controllers
             if (user != null)
             {
                 HttpContext.Session.SetInt32("PatientID", user.PatientID);
+                    
                 return View(user);
             }
              //HttpContext.Session.SetInt32("PatientID", user.PatientID);
@@ -94,6 +95,7 @@ namespace DoctorListMVCApp.Controllers
         public IActionResult AddAppointment()
         {
             int RoleID = (int)HttpContext.Session.GetInt32("RoleID");
+            string EmailID = HttpContext.Session.GetString("EmailID");
             if (RoleID == 2)
             {
                 return View();
@@ -111,6 +113,9 @@ namespace DoctorListMVCApp.Controllers
             {
                int PatientID= (int)HttpContext.Session.GetInt32("PatientID");
                 int DoctorID = (int)HttpContext.Session.GetInt32("DoctorID");
+                //string EmailID = HttpContext.Session.GetString("EmailID");
+                //string FullName = HttpContext.Session.GetString();
+               
                 //int UserID = (int)HttpContext.Session.GetInt32("UserID");
                 var result = patient.AddAppointments(add);
                 return RedirectToAction("GetAllDoc", "Admin");

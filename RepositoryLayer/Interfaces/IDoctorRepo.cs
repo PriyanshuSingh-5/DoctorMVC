@@ -16,5 +16,6 @@ namespace RepositoryLayer.Interfaces
         public List<ScheduleModel> GetAllSchedules(int DoctorID);
         public List<DoctorModel> GetAllDoctorProfile();
         public List<AppointmentModel> GetAppointmentByDocID(int DoctorID);
+        public AppointmentModel ConfirmAppointment(int PatientID);
     }
 }

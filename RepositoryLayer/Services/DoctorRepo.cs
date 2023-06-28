@@ -148,10 +148,8 @@ namespace RepositoryLayer.Services
                 DoctorModel doctor = new DoctorModel();
                 SqlDataReader rd = cmd.ExecuteReader();
                 var result = returnParameter.Value;
-                //if (result != null && result.Equals(0))
-                //{
-                //    throw new Exception("No data added");
-                //}
+                if (result != null && result.Equals(2))
+                    throw new Exception("Doctor don't exist");
                 if (rd.Read())
                 {
                     doctor.DoctorID = rd["DoctorID"] == DBNull.Value ? default : rd.GetInt32("DoctorID");
@@ -472,6 +470,52 @@ namespace RepositoryLayer.Services
 
                     }
                     return null;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public AppointmentModel ConfirmAppointment(int PatientID)
+        {
+            try
+            {
+                //UserModel books = new UserModel();
+                AppointmentModel docs = new AppointmentModel();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetPatientById", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("UserID", PatientID);
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+
+                    while (Reader.Read())
+                    {
+
+
+                       // docs.UserID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt32("UserID");
+                        docs.PatientID = Reader.IsDBNull("PatientID") ? 0 : Reader.GetInt32("PatientID");
+                        docs.Concerns = Reader.IsDBNull("PatientImage") ? string.Empty : Reader.GetString("PatientImage");
+                        docs.Appointmentdate = Reader.GetDateTime(2);
+                        docs.StartTime = Reader.GetTimeSpan(3);
+                        docs.EndTime = Reader.GetTimeSpan(4);
+
+
+                        //books.Add(docs);
+                    }
+                    return docs;
+
                 }
             }
             catch (Exception)

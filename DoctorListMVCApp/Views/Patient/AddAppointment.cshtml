@@ -25,17 +25,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Appointmentdate" class="control-label"></label>
-                <input asp-for="Appointmentdate" type="date" class="form-control" />
+                <input asp-for="Appointmentdate" id="appointmentDate" type="date" class="form-control" onchange="validateAppointmentDate()" />
                 <span asp-validation-for="Appointmentdate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" type="time" class="form-control" />
+                <input asp-for="StartTime" id="startTime" type="time" class="form-control" onchange="setEndTime(this.value)"/>
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndTime" class="control-label"></label>
-                <input asp-for="EndTime" type="time" class="form-control" />
+                <input asp-for="EndTime" id="endTime" type="time" class="form-control" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
             @*<div class="form-group form-check">
@@ -87,3 +87,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script src="~/js/Appoitmnet.js"></script>
