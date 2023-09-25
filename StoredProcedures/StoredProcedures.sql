@@ -1262,3 +1262,194 @@ END
 GO
 
 
+
+-----Confirm appointment----
+Create  PROCEDURE uspConfirmAppointment
+	-- Add the parameters for the stored procedure here
+	@PatientID int
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+	DECLARE @result int = 0;
+	if((select count(*) from Appointment where PatientID = @PatientID) = 0)
+	begin
+		set @result = 2; 
+		throw 5000,'Patient dont exist',-1;
+	end
+	select * from Appointment where PatientID=@PatientID
+	update Appointment set IsActive=1 where PatientID=@PatientID
+COMMIT TRANSACTION;	
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+
+
+
+
+-----Update Appointment By doctor---
+Create PROCEDURE uspUpdateappointmentByDocID
+	
+@Concerns varchar(255),
+@Appointmentdate Date,
+@StartTime time,
+@EndTime time,
+@DoctorID int ,
+@PatientID int ,
+@ScheduleID int ,
+@UpdatedAt datetime
+	
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+
+	
+	DECLARE @result int = 0 ;
+	
+	if((select count(*) from Appointment where DoctorID = @DoctorID) = 0)
+	begin
+		set @result = 2; 
+		throw 5000,'User dont exist',-1;
+	end
+	
+
+	Update Appointment set Concerns=@Concerns ,
+Appointmentdate=@Appointmentdate ,
+StartTime=@StartTime ,
+EndTime=@EndTime ,
+PatientID=@PatientID  ,
+ScheduleID=@ScheduleID  ,
+UpdatedAt=@UpdatedAt   where DoctorID=@DoctorID;
+
+--	SELECT @new_identity = (select ID from @Identity);
+
+	select AppointmentID,
+	Concerns ,
+Appointmentdate ,
+StartTime ,
+EndTime ,
+DoctorID  ,
+PatientID  ,
+ScheduleID  ,
+CreatedAt ,
+UpdatedAt 
+	from Appointment  where DoctorID = @DoctorID;
+
+	set @result = 1;
+COMMIT TRANSACTION;	
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+
+
+
+---Delete Appointment By DoctorId---
+CREATE   PROCEDURE RemoveAppointmentByDoc
+	-- Add the parameters for the stored procedure here
+	@DoctorID int,
+	@AppointmentID int
+AS
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+SET XACT_ABORT on;
+SET NOCOUNT ON;
+BEGIN
+BEGIN TRY
+BEGIN TRANSACTION;
+DECLARE @result int = 0;
+if((select count(AppointmentID) from Appointment where AppointmentID = @AppointmentID and IsTrash = 0) = 1)
+	begin
+	update Appointment set IsTrash = 1
+					where DoctorID = @DoctorID ;
+					set @result = 1;
+	end
+
+	
+	else
+		begin
+			set @result = 3;
+			throw 50003,'Appointment is not available',-1;
+		end
+COMMIT TRANSACTION;	
+return @result;
+END TRY
+BEGIN CATCH
+--SELECT ERROR_NUMBER() as ErrorNumber, ERROR_MESSAGE() as ErrorMessage;
+IF(XACT_STATE()) = -1
+	BEGIN
+		PRINT
+		'transaction is uncommitable' + ' rolling back transaction'
+		ROLLBACK TRANSACTION;
+		print @result;
+		return @result;
+	END;
+ELSE IF(XACT_STATE()) = 1
+	BEGIN
+		PRINT
+		'transaction is commitable' + ' commiting back transaction'
+		COMMIT TRANSACTION;
+		print @result;
+		return @result;
+	END;
+END CATCH
+	
+END
+GO
+
+
+exec RemoveAppointmentByDoc 8, 1
+
+
+
+
+
+

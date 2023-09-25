@@ -6,12 +6,13 @@
     <title>@ViewData["Title"] - DoctorListMVCApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/register.css" />
+   
     <link rel="stylesheet" href="~/css/GetAllDoc.css" />
+    <link rel="stylesheet" href="~/css/Styledemo.css" />
 </head>
 <style>
     body {
-        background-image: url('../assets/BackIMG.jpg');
+        background-image: url('../assets/backD.jpeg');
         background-repeat: no-repeat;
         background-size: cover;
         background-color: #e9ecee;
@@ -23,7 +24,7 @@
        
         <nav  style="background-color: #e9ecee">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DoctorListMVCApp</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logoImg" src="~/assets/Free_Sample_By_Wix.jpg"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +36,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="GetAllDocProfile">Doctors</a>
-                            @*<img src="~/assets/Dontmakemethink.jpg" />*@
+                            @*<img src="~/assets/backD.jpeg" />*@
                         </li>
                     </ul>
                 </div>

@@ -528,5 +528,105 @@ namespace RepositoryLayer.Services
                 connection.Close();
             }
         }
+
+
+        public AppointmentModel UpdateAppointmentByDoc(AppointmentModel Account)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("uspUpdateappointmentByDocID", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("DoctorID", Account.DoctorID);
+                cmd.Parameters.AddWithValue("PatientID", Account.PatientID);
+                cmd.Parameters.AddWithValue("Concerns", Account.Concerns);
+                cmd.Parameters.AddWithValue("Appointmentdate", Account.Appointmentdate);
+                cmd.Parameters.AddWithValue("StartTime", Account.StartTime);
+                cmd.Parameters.AddWithValue("EndTime", Account.EndTime);
+                cmd.Parameters.AddWithValue("ScheduleID", Account.ScheduleID);
+
+                cmd.Parameters.AddWithValue("UpdatedAt", Account.UpdatedAt);
+               
+                var returnParameter = cmd.Parameters.Add("@Result", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+
+                AppointmentModel doctor = new AppointmentModel();
+                SqlDataReader rd = cmd.ExecuteReader();
+                var result = returnParameter.Value;
+                if (result != null && result.Equals(2))
+                    throw new Exception("Doctor don't exist");
+                if (rd.Read())
+                {
+                    doctor.DoctorID = rd["DoctorID"] == DBNull.Value ? default : rd.GetInt32("DoctorID");
+                    
+                    doctor.Concerns = rd["Concerns"] == DBNull.Value ? default : rd.GetString("Concerns");
+                   
+                    doctor.Appointmentdate = rd.GetDateTime(2);
+                    doctor.StartTime = rd.GetTimeSpan(3);
+                    doctor.EndTime = rd.GetTimeSpan(4);
+                    doctor.PatientID = rd.GetInt32(8);
+                }
+
+                return doctor;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public AppointmentModel GetAppointmentByDoc(int DoctorID)
+        {
+            try
+            {
+                //UserModel books = new UserModel();
+                AppointmentModel docs = new AppointmentModel();
+                using (connection)
+                {
+                    SqlCommand command = new SqlCommand("uspGetAppointmentByDocId", connection);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("DoctorID", DoctorID);
+
+                    connection.Open();
+                    SqlDataReader Reader = command.ExecuteReader();
+
+
+                    while (Reader.Read())
+                    {
+
+
+                        // docs.UserID = Reader.IsDBNull("UserID") ? 0 : Reader.GetInt32("UserID");
+                        docs.PatientID = Reader.IsDBNull("PatientID") ? 0 : Reader.GetInt32("PatientID");
+                        docs.AppointmentID = Reader.IsDBNull("AppointmentID") ? 0 : Reader.GetInt32("AppointmentID");
+                        docs.Concerns = Reader.IsDBNull("Concerns") ? string.Empty : Reader.GetString("Concerns");
+                        docs.Appointmentdate = Reader.GetDateTime(2);
+                        docs.StartTime = Reader.GetTimeSpan(3);
+                        docs.EndTime = Reader.GetTimeSpan(4);
+
+
+                        //books.Add(docs);
+                    }
+                    return docs;
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

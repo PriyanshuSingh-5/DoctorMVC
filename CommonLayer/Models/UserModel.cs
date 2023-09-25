@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace CommonLayer.Models
@@ -7,6 +8,7 @@ namespace CommonLayer.Models
     public class UserModel
     {
         public int UserID { get; set; }
+        [Required(ErrorMessage ="{0} should not be empty")]
         public string FullName { get; set; }
         public string EmailID { get; set; }
         public string Password { get; set; }

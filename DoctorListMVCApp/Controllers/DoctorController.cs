@@ -258,25 +258,25 @@ namespace DoctorListMVCApp.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Accept(int PatientID)
-        {
-            PatientID = (int)HttpContext.Session.GetInt32("PatientID");
-            int UserID =(int)HttpContext.Session.GetInt32("UserID");
+        //[HttpGet]
+        //public IActionResult Accept(int PatientID)
+        //{
+        //    PatientID = (int)HttpContext.Session.GetInt32("PatientID");
+        //    int UserID =(int)HttpContext.Session.GetInt32("UserID");
 
-            if (PatientID == null)
-            {
-                return NotFound();
-            }
-            PatientModel user = patientBusiness.GetPatientDetails(UserID);
+        //    if (PatientID == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    PatientModel user = patientBusiness.GetPatientDetails(UserID);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(user);
 
-        }
+        //}
 
         //[HttpPost, ActionName("Accept")]
         //[ValidateAntiForgeryToken]
@@ -289,5 +289,44 @@ namespace DoctorListMVCApp.Controllers
         //    mSMQModel.SendMessage(EmailID, result.FullName);
         //    return RedirectToAction("GetAllDoc");
         //}
+
+
+        [HttpGet]
+        public IActionResult UpdatetAppointmentByDocID(int DoctorID)
+        {
+            
+                DoctorID = (int)HttpContext.Session.GetInt32("DoctorID");
+                if (DoctorID == null)
+                {
+                    return NotFound();
+                }
+                AppointmentModel user = doctorBusiness.GetAppointmentByDoc(DoctorID);
+
+                if (user != null)
+                {
+                    // HttpContext.Session.SetInt32("DoctorID", user.DoctorID);
+                    return View(user);
+                }
+                return View();
+           
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdatetAppointmentByDocID( [Bind] AppointmentModel appointment)
+        {
+            int DoctorID = (int)HttpContext.Session.GetInt32("DoctorID");
+            if (DoctorID != appointment.DoctorID)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                doctorBusiness.UpdateAppointmentByDoc(appointment);
+                return RedirectToAction("GetAllAppointment");
+            }
+            return View(appointment);
+        }
     }
 }

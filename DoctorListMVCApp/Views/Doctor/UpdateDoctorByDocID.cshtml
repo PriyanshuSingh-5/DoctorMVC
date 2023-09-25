@@ -14,8 +14,8 @@
         <form asp-action="UpdateDoctorByDocID">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="DoctorID" class="control-label"></label>
-                <input asp-for="DoctorID" class="form-control" value=@Context.Session.GetInt32("DoctorID") readonly />
+                @*<label asp-for="DoctorID" class="control-label"></label>*@
+                <input asp-for="DoctorID" class="form-control" value=@Context.Session.GetInt32("DoctorID") type="hidden" readonly />
                 <span asp-validation-for="DoctorID" class="text-danger"></span>
             </div>
             <div class="form-group">

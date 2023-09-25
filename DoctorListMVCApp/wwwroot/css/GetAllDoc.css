@@ -10,3 +10,7 @@
 .main {
     display: flex;
 }
+
+.logoImg {
+    height: 75px;
+}

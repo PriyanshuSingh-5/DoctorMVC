@@ -17,5 +17,9 @@ namespace RepositoryLayer.Interfaces
         public List<DoctorModel> GetAllDoctorProfile();
         public List<AppointmentModel> GetAppointmentByDocID(int DoctorID);
         public AppointmentModel ConfirmAppointment(int PatientID);
+
+        public AppointmentModel UpdateAppointmentByDoc(AppointmentModel Account);
+
+        public AppointmentModel GetAppointmentByDoc(int DoctorID);
     }
 }
